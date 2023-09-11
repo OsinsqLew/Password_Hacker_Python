@@ -25,10 +25,7 @@ client_socket.connect(address)
 # message = args.text.encode()
 # client_socket.send(message)
 
-# uwaga mikolajka hudko, zeby zrobic stringa zamiast tablicy bo czytelniejsze
-symbols = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
-           'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o',
-           'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+symbols = '1234567890abcdefghijklmnopqrstuvwxyz'
 
 
 # for i in range(97, 122):  # dodajemy litery po ascii
@@ -49,6 +46,7 @@ def tuplelist_to_str(tup_list):
     return wrd_list
 
 
+# sending given message and returning recived response
 def message_manage(text):
     message = text.encode()
     client_socket.send(message)
@@ -86,6 +84,7 @@ def dict_based_bf(file, expected_response):
                     return password.strip()
 
 
+# dictionary based brute force, login and password are sent in json format
 def dict_based_bf_json(file, expected_response, template):
     with open(file) as wej:
         for line in wej:
@@ -130,7 +129,7 @@ def catching_exception(login_file):
 
     return json.dumps(message)
 
-
+# finding login using brute force
 def find_login(login_file):
     message = dict(login=" ", password=" ")
     login = dict_based_bf_json(login_file, "Wrong password!", message)
